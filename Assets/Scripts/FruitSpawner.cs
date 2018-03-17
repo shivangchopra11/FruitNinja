@@ -4,9 +4,16 @@ using UnityEngine;
 
 public class FruitSpawner : MonoBehaviour {
 
+	public static FruitSpawner instance;
 	[SerializeField]
 	private GameObject[] fruits;
 	private Vector3 throwForce = new Vector3(0, 13, 0);
+
+	void Awake() {
+		if (instance == null)
+			instance = this;
+	}
+
 	// Use this for initialization
 	void Start()
 	{
