@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Sat Mar 17 18:07:24 IST 2018
+#Fri Mar 23 03:52:58 IST 2018
 122.file=/Users/shivang/UnityCourse/FruitNinja/Temp/gradleOut/build/intermediates/transforms/mergeJniLibs/release/folders/2000/1f/main/lib/x86/libmono.so
 60.set=ASSET
 52.set=ASSET

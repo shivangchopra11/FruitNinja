@@ -57,6 +57,7 @@ GameObject:
   - component: {fileID: 114722674727633132}
   - component: {fileID: 135280640096005040}
   - component: {fileID: 54562321956716610}
+  - component: {fileID: 114507523375431510}
   m_Layer: 0
   m_Name: Strawberry
   m_TagString: Untagged
@@ -71,8 +72,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1979911283573598}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -5}
-  m_LocalScale: {x: 20, y: 20, z: 20}
+  m_LocalPosition: {x: 0, y: 0, z: 5}
+  m_LocalScale: {x: 25, y: 25, z: 25}
   m_Children:
   - {fileID: 4860855651734784}
   - {fileID: 4985326354030548}
@@ -204,6 +205,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 8
   m_CollisionDetection: 0
+--- !u!114 &114507523375431510
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1979911283573598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fcb9e7ae3be2495dbfbadae0f417ff5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  splashReference:
+  - {fileID: 1600972275685866, guid: 2825065d19a2c4775be15e27b15c12ff, type: 2}
+  - {fileID: 1715060009910026, guid: 57afbe03240af4c55b98d64bd068e91a, type: 2}
+  - {fileID: 1459250535695780, guid: df943a951255f4a9ca825905a9629ba1, type: 2}
 --- !u!114 &114722674727633132
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -223,7 +239,7 @@ SphereCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1979911283573598}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.02

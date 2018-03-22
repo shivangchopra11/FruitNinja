@@ -57,6 +57,7 @@ GameObject:
   - component: {fileID: 114361386132815100}
   - component: {fileID: 136918752250303568}
   - component: {fileID: 54376558496908434}
+  - component: {fileID: 114903961827417002}
   m_Layer: 0
   m_Name: Kiwi
   m_TagString: Untagged
@@ -97,7 +98,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1826526367430026}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -5}
+  m_LocalPosition: {x: 0, y: 0, z: 5}
   m_LocalScale: {x: 20, y: 20, z: 20}
   m_Children:
   - {fileID: 4085393633972838}
@@ -214,6 +215,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tumble: 5
+--- !u!114 &114903961827417002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1826526367430026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fcb9e7ae3be2495dbfbadae0f417ff5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  splashReference:
+  - {fileID: 1600972275685866, guid: 2825065d19a2c4775be15e27b15c12ff, type: 2}
+  - {fileID: 1715060009910026, guid: 57afbe03240af4c55b98d64bd068e91a, type: 2}
+  - {fileID: 1459250535695780, guid: df943a951255f4a9ca825905a9629ba1, type: 2}
 --- !u!136 &136918752250303568
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -221,7 +237,7 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1826526367430026}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.024
   m_Height: 0.08
