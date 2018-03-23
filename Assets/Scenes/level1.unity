@@ -245,6 +245,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bladeTrailPrefab: {fileID: 1155589512402444, guid: 260a35a8158994616ae11147773e67ec,
     type: 2}
+  minCuttingVelocity: 0.001
+  splashReference:
+  - {fileID: 1600972275685866, guid: 2825065d19a2c4775be15e27b15c12ff, type: 2}
+  - {fileID: 1715060009910026, guid: 57afbe03240af4c55b98d64bd068e91a, type: 2}
+  - {fileID: 1459250535695780, guid: df943a951255f4a9ca825905a9629ba1, type: 2}
 --- !u!4 &161044081
 Transform:
   m_ObjectHideFlags: 0
@@ -252,7 +257,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 161044077}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
