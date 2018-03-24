@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Score
   - Line
+  - Apple
+  - Kiwi
+  - Strawberry
+  - Bomb
   layers:
   - Default
   - TransparentFX

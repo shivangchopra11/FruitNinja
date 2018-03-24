@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Blade : MonoBehaviour {
@@ -16,6 +17,7 @@ public class Blade : MonoBehaviour {
 
 	Rigidbody rb;
 	Camera cam;
+	public Text gameover;
 //	CircleCollider2D circleCollider;
 //	SphereCollider sphereCollider;
 	public GameObject[] leftCut;
@@ -65,6 +67,12 @@ public class Blade : MonoBehaviour {
 		{
 			UpdateCut();
 		}
+
+//		if (gameover.enabled == true) {
+//			if (Input.touchCount > 0 || Input.GetMouseButtonDown (0)) {
+//				SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+//			}
+//		}
 
 
 
@@ -123,9 +131,18 @@ public class Blade : MonoBehaviour {
 		if (other.gameObject.tag == "Apple") {
 			cutpos = 0;
 		} else if (other.gameObject.tag == "Kiwi") {
-			cutpos=1;
-		} else {
+			cutpos = 1;
+		} else if (other.gameObject.tag == "Strawberry") {
 			cutpos = 2;
+		} else {
+			FruitSpawner.instance.CancelInvoke ("SpawnFruit");
+			gameover.GetComponent<Text>().enabled = true;
+//			Destroy(other.gameObject);
+			other.rigidbody.freezeRotation = true;
+			other.rigidbody.useGravity = false;
+			Camera.main.GetComponent<AudioSource>().Pause();
+			other.gameObject.GetComponent<AudioSource>().Play ();
+			return;
 		}
 		GameObject left = Instantiate (leftCut [cutpos], temp1, leftCut [0].transform.rotation);
 		GameObject right = Instantiate (rightCut [cutpos], temp1, rightCut [0].transform.rotation);
@@ -142,6 +159,7 @@ public class Blade : MonoBehaviour {
 		left.GetComponent<Rigidbody>().AddForce (throwForceleft, ForceMode.VelocityChange);
 		right.GetComponent<Rigidbody>().AddForce (throwForceright, ForceMode.VelocityChange);
 		Destroy(other.gameObject);
+		GetComponent<AudioSource> ().Play ();
 		pos = Random.Range (0, 3);
 		randomPos = new Vector3(temp1.x,temp1.y, 5f);
 		GameObject splash = Instantiate(splashReference[pos], randomPos, transform.rotation);

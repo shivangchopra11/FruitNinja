@@ -37,7 +37,7 @@ android {
 	}
 
 	aaptOptions {
-		noCompress '.unity3d', '.ress', '.resource', '.obb'
+		noCompress '.unity3d', '.ress', '.resource', '.obb','bin/data/sharedassets0.resource'
 	}
 
 

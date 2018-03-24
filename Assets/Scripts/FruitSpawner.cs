@@ -29,7 +29,8 @@ public class FruitSpawner : MonoBehaviour {
 	{
 		for (byte i = 0; i < 4; i++)
 		{
-			int pos = Random.Range (0, 3);
+			int pos = Random.Range (0, 4);
+//			int pos = 3;
 			var randomRotation = Quaternion.Euler( Random.Range(0, 360) , Random.Range(0, 360) , Random.Range(0, 360));
 			GameObject fruit = Instantiate(fruits[pos], new Vector3(Random.Range(-6.5f, 6.5f), -5.0f, 1.0f), randomRotation) as GameObject;
 			Vector3 throwForce = new Vector3(0, Random.Range(10,14), 0);

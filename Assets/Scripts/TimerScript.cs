@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 
 public class TimerScript : MonoBehaviour {
 
@@ -15,7 +17,11 @@ public class TimerScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (gameover.enabled == true) {
+			if (Input.touchCount > 0 || Input.GetMouseButtonDown (0)) {
+				SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+			}
+		}
 	}
 
 	void ReduceTime() {
@@ -24,6 +30,7 @@ public class TimerScript : MonoBehaviour {
 			FruitSpawner.instance.CancelInvoke ("SpawnFruit");
 			CancelInvoke ("ReduceTime");
 			gameover.GetComponent<Text>().enabled = true;
+			Camera.main.GetComponent<AudioSource>().Pause();
 		}
 		int sec = (int)timer % 60; // calculate the seconds
 		int min = (int)timer / 60; // calculate the minutes
