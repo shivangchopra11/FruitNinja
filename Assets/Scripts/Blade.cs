@@ -17,8 +17,9 @@ public class Blade : MonoBehaviour {
 	Rigidbody rb;
 	Camera cam;
 //	CircleCollider2D circleCollider;
-	SphereCollider sphereCollider;
-
+//	SphereCollider sphereCollider;
+	public GameObject[] leftCut;
+	public GameObject[] rightCut;
 
 
 	public GameObject[] splashReference;
@@ -30,7 +31,7 @@ public class Blade : MonoBehaviour {
 	{
 		cam = Camera.main;
 		rb = GetComponent<Rigidbody>();
-		sphereCollider = GetComponent<SphereCollider>();
+//		sphereCollider = GetComponent<SphereCollider>();
 		pos = Random.Range (0, 3);
 		scoreReference = GameObject.FindGameObjectWithTag("Score").GetComponent<Text>();
 		randomPos = new Vector3(Random.Range(-7.0f, 7.0f), Random.Range(-4.5f, 3.5f), 5f);
@@ -117,9 +118,32 @@ public class Blade : MonoBehaviour {
 //			//			Camera.main.GetComponent<AudioSource>().Play();
 //			Destroy(gameObject);
 //		}
+		Vector3 temp1 = new Vector3(other.transform.position.x,other.transform.position.y,other.transform.position.z);
+		int cutpos;
+		if (other.gameObject.tag == "Apple") {
+			cutpos = 0;
+		} else if (other.gameObject.tag == "Kiwi") {
+			cutpos=1;
+		} else {
+			cutpos = 2;
+		}
+		GameObject left = Instantiate (leftCut [cutpos], temp1, leftCut [0].transform.rotation);
+		GameObject right = Instantiate (rightCut [cutpos], temp1, rightCut [0].transform.rotation);
+		Vector3 throwForceleft = new Vector3(-1 ,0, 0);
+		Vector3 throwForceright = new Vector3(1 ,0, 0);
+		if (cutpos != 2) {
+			throwForceleft = new Vector3(-1 ,0, 0);
+			throwForceright = new Vector3(1 ,0, 0);
+		} else {
+			throwForceleft = new Vector3(1 ,0, 0);
+			throwForceright = new Vector3(-1 ,0, 0);
+		}
+
+		left.GetComponent<Rigidbody>().AddForce (throwForceleft, ForceMode.VelocityChange);
+		right.GetComponent<Rigidbody>().AddForce (throwForceright, ForceMode.VelocityChange);
 		Destroy(other.gameObject);
 		pos = Random.Range (0, 3);
-		randomPos = new Vector3(Random.Range(-7.0f, 7.0f), Random.Range(-4.5f, 3.5f), 5f);
+		randomPos = new Vector3(temp1.x,temp1.y, 5f);
 		GameObject splash = Instantiate(splashReference[pos], randomPos, transform.rotation);
 		Destroy (splash, 1f);
 
