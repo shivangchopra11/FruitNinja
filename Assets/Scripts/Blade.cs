@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Blade : MonoBehaviour {
 
 	public GameObject bladeTrailPrefab;
-	public float minCuttingVelocity = 0.01f;
+	public float minCuttingVelocity = 0.001f;
 
 	bool isCutting = false;
 
@@ -74,17 +74,18 @@ public class Blade : MonoBehaviour {
 	void UpdateCut ()
 	{
 		Vector3 newPosition = cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,Input.mousePosition.y,5f));
+		newPosition.z = 1f;
 //		newPosition.z = 5f;
 		rb.position = newPosition;
 
-		float velocity = (newPosition - previousPosition).magnitude * Time.deltaTime;
-		if (velocity > minCuttingVelocity)
-		{
-			sphereCollider.enabled = true;
-		} else
-		{
-			sphereCollider.enabled = false;
-		}
+//		float velocity = (newPosition - previousPosition).magnitude * Time.deltaTime;
+//		if (velocity > minCuttingVelocity)
+//		{
+//			sphereCollider.enabled = true;
+//		} else
+//		{
+//			sphereCollider.enabled = false;
+//		}
 
 		previousPosition = newPosition;
 	}
@@ -94,8 +95,10 @@ public class Blade : MonoBehaviour {
 		isCutting = true;
 		currentBladeTrail = Instantiate(bladeTrailPrefab, transform);
 		previousPosition = cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x,Input.mousePosition.y,5f));
+		Debug.Log ("Blade"+previousPosition.z.ToString());
+//		previousPosition.z = 1f;
 //		previousPosition.z = 5f;
-		sphereCollider.enabled = false;
+//		sphereCollider.enabled = false;
 	}
 
 	void StopCutting ()
@@ -103,19 +106,22 @@ public class Blade : MonoBehaviour {
 		isCutting = false;
 		currentBladeTrail.transform.SetParent(null);
 		Destroy(currentBladeTrail, 2f);
-		sphereCollider.enabled = false;
+//		sphereCollider.enabled = false;
 	}
 
 	void OnCollisionEnter(Collision other)
 	{
-		Debug.Log (other.gameObject.tag);
+		Debug.Log ("COLLIDE" + other.gameObject.tag);
 //		if(other.gameObject.tag == "Line")
 //		{
 //			//			Camera.main.GetComponent<AudioSource>().Play();
 //			Destroy(gameObject);
 //		}
 		Destroy(other.gameObject);
-		Instantiate(splashReference[pos], randomPos, transform.rotation);
+		pos = Random.Range (0, 3);
+		randomPos = new Vector3(Random.Range(-7.0f, 7.0f), Random.Range(-4.5f, 3.5f), 5f);
+		GameObject splash = Instantiate(splashReference[pos], randomPos, transform.rotation);
+		Destroy (splash, 1f);
 
 		/* Update Score */
 

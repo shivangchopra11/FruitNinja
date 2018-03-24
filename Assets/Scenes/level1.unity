@@ -200,7 +200,7 @@ GameObject:
   - component: {fileID: 161044078}
   m_Layer: 0
   m_Name: Blade
-  m_TagString: Untagged
+  m_TagString: Line
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -212,10 +212,10 @@ SphereCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 161044077}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
+  m_IsTrigger: 1
+  m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.3
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &161044079
 Rigidbody:
@@ -245,7 +245,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bladeTrailPrefab: {fileID: 1155589512402444, guid: 260a35a8158994616ae11147773e67ec,
     type: 2}
-  minCuttingVelocity: 0.001
+  minCuttingVelocity: 0.0001
   splashReference:
   - {fileID: 1600972275685866, guid: 2825065d19a2c4775be15e27b15c12ff, type: 2}
   - {fileID: 1715060009910026, guid: 57afbe03240af4c55b98d64bd068e91a, type: 2}
@@ -257,7 +257,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 161044077}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 5}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

@@ -34,4 +34,14 @@ public class Fruit : MonoBehaviour {
 //
 //		}
 //	}
+
+	void OnTriggerEnter(Collider other) {
+		if(other.gameObject.tag == "Line")
+		{
+			//			Camera.main.GetComponent<AudioSource>().Play();
+			Destroy(gameObject);
+
+
+		}
+	}
 }
