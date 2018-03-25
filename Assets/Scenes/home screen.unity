@@ -1169,6 +1169,10 @@ Prefab:
       propertyPath: m_UseGravity
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1530555927888632, guid: bf65dad8d086248eca076910b217ef26, type: 2}
+      propertyPath: m_TagString
+      value: Exit
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bf65dad8d086248eca076910b217ef26, type: 2}
   m_IsPrefabParent: 0
