@@ -18,6 +18,10 @@ public class Blade : MonoBehaviour {
 	Rigidbody rb;
 	Camera cam;
 	public Text gameover;
+	public Text restart;
+	public Text mainMenu;
+	public GameObject restartgo;
+	public GameObject menugo;
 //	CircleCollider2D circleCollider;
 //	SphereCollider sphereCollider;
 	public GameObject[] leftCut;
@@ -113,12 +117,20 @@ public class Blade : MonoBehaviour {
 	}
 
 
-	IEnumerator Example()
+	IEnumerator Level1()
 	{
 //		print(Time.time);
 		yield return new WaitForSeconds(0.1f);
 		SceneManager.LoadScene("level1");
 //		print(Time.time);
+	}
+
+	IEnumerator MainMenu()
+	{
+		//		print(Time.time);
+		yield return new WaitForSeconds(0.1f);
+		SceneManager.LoadScene("home screen");
+		//		print(Time.time);
 	}
 
 	void OnCollisionEnter(Collision other)
@@ -136,9 +148,34 @@ public class Blade : MonoBehaviour {
 			right.GetComponent<Rigidbody>().AddForce (throwForceright, ForceMode.VelocityChange);
 			Destroy(other.gameObject);
 			GetComponent<AudioSource> ().Play ();
-			StartCoroutine(Example());
+			StartCoroutine(Level1());
 
 			return;
+		}
+
+
+		if (other.gameObject.tag == "Restart") {
+			temp1 = new Vector3(other.transform.position.x,other.transform.position.y,other.transform.position.z);
+			left = Instantiate (leftCut [1], temp1, leftCut [0].transform.rotation);
+			right = Instantiate (rightCut [1], temp1, rightCut [0].transform.rotation);
+			left.GetComponent<Rigidbody>().AddForce (throwForceleft, ForceMode.VelocityChange);
+			right.GetComponent<Rigidbody>().AddForce (throwForceright, ForceMode.VelocityChange);
+			Destroy(other.gameObject);
+			GetComponent<AudioSource> ().Play ();
+			StartCoroutine(Level1());
+		}
+
+		if (other.gameObject.tag == "Main Menu") {
+			throwForceleft = new Vector3(1 ,0, 0);
+			throwForceright = new Vector3(-1 ,0, 0);
+			temp1 = new Vector3(other.transform.position.x,other.transform.position.y,other.transform.position.z);
+			left = Instantiate (leftCut [2], temp1, leftCut [0].transform.rotation);
+			right = Instantiate (rightCut [2], temp1, rightCut [0].transform.rotation);
+			left.GetComponent<Rigidbody>().AddForce (throwForceleft, ForceMode.VelocityChange);
+			right.GetComponent<Rigidbody>().AddForce (throwForceright, ForceMode.VelocityChange);
+			Destroy(other.gameObject);
+			GetComponent<AudioSource> ().Play ();
+			StartCoroutine(MainMenu());
 		}
 
 		Debug.Log ("COLLIDE" + other.gameObject.tag);
@@ -158,6 +195,10 @@ public class Blade : MonoBehaviour {
 		} else {
 			FruitSpawner.instance.CancelInvoke ("SpawnFruit");
 			gameover.GetComponent<Text>().enabled = true;
+			restart.GetComponent<Text>().enabled = true;
+			mainMenu.GetComponent<Text>().enabled = true;
+			restartgo.gameObject.SetActive (true);
+			menugo.gameObject.SetActive (true);
 //			Destroy(other.gameObject);
 			other.rigidbody.freezeRotation = true;
 			other.rigidbody.useGravity = false;
