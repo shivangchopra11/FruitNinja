@@ -22,6 +22,7 @@ public class Blade : MonoBehaviour {
 	public Text mainMenu;
 	public GameObject restartgo;
 	public GameObject menugo;
+	public Text highScore;
 //	CircleCollider2D circleCollider;
 //	SphereCollider sphereCollider;
 	public GameObject[] leftCut;
@@ -71,6 +72,8 @@ public class Blade : MonoBehaviour {
 		{
 			UpdateCut();
 		}
+
+		highScore.text = PlayerPrefs.GetInt ("highScore").ToString ();
 
 
 
@@ -125,6 +128,14 @@ public class Blade : MonoBehaviour {
 //		print(Time.time);
 	}
 
+	IEnumerator Exit1()
+	{
+		//		print(Time.time);
+		yield return new WaitForSeconds(0.1f);
+		Application.Quit();
+		//		print(Time.time);
+	}
+
 	IEnumerator MainMenu()
 	{
 		//		print(Time.time);
@@ -163,6 +174,7 @@ public class Blade : MonoBehaviour {
 			Destroy(other.gameObject);
 			GetComponent<AudioSource> ().Play ();
 			StartCoroutine(Level1());
+			return;
 		}
 
 		if (other.gameObject.tag == "Main Menu") {
@@ -176,6 +188,20 @@ public class Blade : MonoBehaviour {
 			Destroy(other.gameObject);
 			GetComponent<AudioSource> ().Play ();
 			StartCoroutine(MainMenu());
+			return;
+		}
+
+
+		if (other.gameObject.tag == "Exit") {
+			temp1 = new Vector3(other.transform.position.x,other.transform.position.y,other.transform.position.z);
+			left = Instantiate (leftCut [0], temp1, leftCut [0].transform.rotation);
+			right = Instantiate (rightCut [0], temp1, rightCut [0].transform.rotation);
+			left.GetComponent<Rigidbody>().AddForce (throwForceleft, ForceMode.VelocityChange);
+			right.GetComponent<Rigidbody>().AddForce (throwForceright, ForceMode.VelocityChange);
+			Destroy(other.gameObject);
+			GetComponent<AudioSource> ().Play ();
+			StartCoroutine(Exit1());
+			return;
 		}
 
 		Debug.Log ("COLLIDE" + other.gameObject.tag);
@@ -228,9 +254,18 @@ public class Blade : MonoBehaviour {
 
 
 
+
 		/* Update Score */
 
 		scoreReference.text = (int.Parse(scoreReference.text) + 1).ToString();
+		if(PlayerPrefs.HasKey("highScore")) {
+			if(int.Parse(scoreReference.text) > PlayerPrefs.GetInt("highScore"))
+				PlayerPrefs.SetInt("highScore",int.Parse(scoreReference.text));
+		}
+		else {
+			PlayerPrefs.SetInt("highScore",int.Parse(scoreReference.text));
+		}
+
 	}
 
 }

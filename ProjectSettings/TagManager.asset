@@ -11,6 +11,9 @@ TagManager:
   - Strawberry
   - Bomb
   - New Game
+  - Restart
+  - Main Menu
+  - Exit
   layers:
   - Default
   - TransparentFX
