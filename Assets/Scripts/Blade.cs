@@ -68,12 +68,6 @@ public class Blade : MonoBehaviour {
 			UpdateCut();
 		}
 
-//		if (gameover.enabled == true) {
-//			if (Input.touchCount > 0 || Input.GetMouseButtonDown (0)) {
-//				SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-//			}
-//		}
-
 
 
 
@@ -118,15 +112,42 @@ public class Blade : MonoBehaviour {
 //		sphereCollider.enabled = false;
 	}
 
-	void OnCollisionEnter(Collision other)
+
+	IEnumerator Example()
 	{
+//		print(Time.time);
+		yield return new WaitForSeconds(0.1f);
+		SceneManager.LoadScene("level1");
+//		print(Time.time);
+	}
+
+	void OnCollisionEnter(Collision other)
+
+	{
+		GameObject left, right;
+		Vector3 temp1;
+		Vector3 throwForceleft = new Vector3(-1 ,0, 0);
+		Vector3 throwForceright = new Vector3(1 ,0, 0);
+		if (other.gameObject.tag == "New Game") {
+			temp1 = new Vector3(other.transform.position.x,other.transform.position.y,other.transform.position.z);
+			left = Instantiate (leftCut [1], temp1, leftCut [0].transform.rotation);
+			right = Instantiate (rightCut [1], temp1, rightCut [0].transform.rotation);
+			left.GetComponent<Rigidbody>().AddForce (throwForceleft, ForceMode.VelocityChange);
+			right.GetComponent<Rigidbody>().AddForce (throwForceright, ForceMode.VelocityChange);
+			Destroy(other.gameObject);
+			GetComponent<AudioSource> ().Play ();
+			StartCoroutine(Example());
+
+			return;
+		}
+
 		Debug.Log ("COLLIDE" + other.gameObject.tag);
 //		if(other.gameObject.tag == "Line")
 //		{
 //			//			Camera.main.GetComponent<AudioSource>().Play();
 //			Destroy(gameObject);
 //		}
-		Vector3 temp1 = new Vector3(other.transform.position.x,other.transform.position.y,other.transform.position.z);
+		temp1 = new Vector3(other.transform.position.x,other.transform.position.y,other.transform.position.z);
 		int cutpos;
 		if (other.gameObject.tag == "Apple") {
 			cutpos = 0;
@@ -144,10 +165,9 @@ public class Blade : MonoBehaviour {
 			other.gameObject.GetComponent<AudioSource>().Play ();
 			return;
 		}
-		GameObject left = Instantiate (leftCut [cutpos], temp1, leftCut [0].transform.rotation);
-		GameObject right = Instantiate (rightCut [cutpos], temp1, rightCut [0].transform.rotation);
-		Vector3 throwForceleft = new Vector3(-1 ,0, 0);
-		Vector3 throwForceright = new Vector3(1 ,0, 0);
+		left = Instantiate (leftCut [cutpos], temp1, leftCut [0].transform.rotation);
+		right = Instantiate (rightCut [cutpos], temp1, rightCut [0].transform.rotation);
+
 		if (cutpos != 2) {
 			throwForceleft = new Vector3(-1 ,0, 0);
 			throwForceright = new Vector3(1 ,0, 0);
@@ -164,6 +184,8 @@ public class Blade : MonoBehaviour {
 		randomPos = new Vector3(temp1.x,temp1.y, 5f);
 		GameObject splash = Instantiate(splashReference[pos], randomPos, transform.rotation);
 		Destroy (splash, 1f);
+
+
 
 		/* Update Score */
 

@@ -18,9 +18,10 @@ public class TimerScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (gameover.enabled == true) {
-			if (Input.touchCount > 0 || Input.GetMouseButtonDown (0)) {
-				SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-			}
+//			if (Input.touchCount > 0 || Input.GetMouseButtonDown (0)) {
+//				SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+//			}
+			CancelInvoke("ReduceTime");
 		}
 	}
 
